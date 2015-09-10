@@ -19,6 +19,11 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats,
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats);
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE:  
+	 * INPUTS: 
+	 * RETURN:
+	 **/
 int main (int argc, char **argv) {
 	srand(time(NULL));		
 	char *line = NULL;
