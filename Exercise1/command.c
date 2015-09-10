@@ -10,10 +10,21 @@
 
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE: parse the input provided by the user and save it within 
+			cmd data structure
+	 * INPUTS: input - char string received from user input
+		   cmd - Commands_t data structure to hold commands
+	 * RETURN: returns true if user input was saved within cmd structure
+			otherwise returns false if there is an error
+	 **/
 bool parse_user_input (const char* input, Commands_t** cmd) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
-
+	// check if input and cmd variables exists
+	if( (input == NULL) | (cmd == NULL) ) {
+		return false;
+	}
 	char *string = strdup(input);
 	
 	*cmd = calloc (1,sizeof(Commands_t));
@@ -37,15 +48,22 @@ bool parse_user_input (const char* input, Commands_t** cmd) {
 }
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE: free memory for a commands structure if the structure exists
+	 * INPUTS: received a Commands_t data structure
+	 * RETURN: nothing to return
+	 **/
 void destroy_commands(Commands_t** cmd) {
 
 	//TODO ERROR CHECK INCOMING PARAMETERS
-	
-	for (int i = 0; i < (*cmd)->num_cmds; ++i) {
-		free((*cmd)->cmds[i]);
+	// check if cmd structure exists
+	if(cmd != NULL) {
+		for (int i = 0; i < (*cmd)->num_cmds; ++i) {
+			free((*cmd)->cmds[i]);
+		}
+		free((*cmd)->cmds);
+		free((*cmd));
+		*cmd = NULL;
 	}
-	free((*cmd)->cmds);
-	free((*cmd));
-	*cmd = NULL;
 }
 
