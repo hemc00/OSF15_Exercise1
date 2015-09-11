@@ -20,9 +20,18 @@ void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats);
 
 	//TODO FUNCTION COMMENT
 	/*
-	 * PURPOSE:  
-	 * INPUTS: 
-	 * RETURN:
+	 * PURPOSE: The command line driven program does matrix creation, reading, writing, and other 
+	 *		miscellaneous operations. The program automatically creates a matrix and writes 
+	 *		that out called temp_mat (in binary do not use the cat command on it). You are 
+	 *		able to display any matrix by using the display command. You can create a new 
+	 *		blank matrix with the command create. To fill a matrix with random values use the 
+	 *		random command between a range of values. To get some experience with bit shifting 
+	 *		there is a command called shift. If you want to write and read in a matrix from 
+	 *		the filesystem use the respective read and write commands. To see memory operations 
+	 *		in action use the duplicate and equal commands. The others commands are sum and add. 
+	 *		To exit the program use the exit command.  
+	 * INPUTS: No inputs needed
+	 * RETURN: Returns 0 on successful exectution otherwise -1 if there was an error 
 	 **/
 int main (int argc, char **argv) {
 	srand(time(NULL));		
@@ -66,9 +75,19 @@ int main (int argc, char **argv) {
 }
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE: Executes commands contained in cmd-cmds structure.  Parses cmd->cmds[0] to
+			determine which command should be executed 
+	 * INPUTS: cmd - Commands_t structure containing data about commands entered by user
+		   mats - Matrix struct containing data about the matrices created
+		   num_mats - number of matrices  
+	 * RETURN:  
+	 **/
 void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
-
+	if(!cmd || !mats || !num_mats || !cmd->cmds[0]) {
+		return;
+	}
 
 	/*Parsing and calling of commands*/
 	if (strncmp(cmd->cmds[0],"display",strlen("display") + 1) == 0
@@ -201,8 +220,19 @@ void run_commands (Commands_t* cmd, Matrix_t** mats, unsigned int num_mats) {
 }
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE: Search a list of matrices to locate a specified one by name  
+	 * INPUTS: mats - Matrix struct containing list of matrices
+		   num_mats - Number of matrices existing
+		   target - Name of matrix to find
+	 * RETURN: Returns the array index of the matrix if succussfully matched otherwise return -1
+	 **/
 unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, const char* target) {
 	//TODO ERROR CHECK INCOMING PARAMETERS
+
+	if(!mats || !num_mats || !target || !mats[0]->name ) {
+		return -1;
+	}
 
 	for (int i = 0; i < num_mats; ++i) {
 		if (strncmp(mats[i]->name,target,strlen(mats[i]->name)) == 0) {
@@ -213,9 +243,20 @@ unsigned int find_matrix_given_name (Matrix_t** mats, unsigned int num_mats, con
 }
 
 	//TODO FUNCTION COMMENT
+	/*
+	 * PURPOSE: Free memory for allocated list of matrices provided 
+	 * INPUTS: mats - Matrix struct containing list of matrices
+		   num_mats - Number of matrices existing
+	 * RETURN:  No return value
+	 **/
 void destroy_remaining_heap_allocations(Matrix_t **mats, unsigned int num_mats) {
 	
 	//TODO ERROR CHECK INCOMING PARAMETERS
-
-	// COMPLETE MISSING MEMORY CLEARING HERE
+	if(mats && num_mats) {
+		// COMPLETE MISSING MEMORY CLEARING HERE
+		for(int i = 0; i < num_mats; i++) {
+		}
+		
+		
+	}
 }
